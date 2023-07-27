@@ -1,4 +1,4 @@
-const handleMongooseError = (error, data, next) => {
+const mongooseError = (error, data, next) => {
   // for unique credential
   const { name, code } = error;
   // 409 Conflict
@@ -7,4 +7,4 @@ const handleMongooseError = (error, data, next) => {
   next();
 };
 
-module.exports = handleMongooseError;
+module.exports = mongooseError;

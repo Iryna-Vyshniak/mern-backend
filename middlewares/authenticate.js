@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-const HttpError = require('../helpers/HttpError');
-
-const { User } = require('../models/user');
+const User = require('../models/User');
+const { HttpError } = require('../utils');
 
 const { SECRET_KEY } = process.env;
 
@@ -21,10 +20,7 @@ const authenticate = (req, res, next) => {
 
   jwt.verify(token, SECRET_KEY, async (err, decode) => {
     if (err) {
-      if (
-        err.name === 'TokenExpiredError' ||
-        err.name === 'JsonWebTokenError'
-      ) {
+      if (err.name === 'TokenExpiredError' || err.name === 'JsonWebTokenError') {
         throw HttpError(401, 'Token Error');
       }
       return next(err);
