@@ -3,9 +3,10 @@ const gravatar = require('gravatar');
 const crypto = require('crypto');
 
 const User = require('../../models/User');
+const { ctrlWrapper } = require('../../decorators');
 const { HttpError, sendEmail } = require('../../utils');
 
-const register = async (req, res) => {
+const register = ctrlWrapper(async (req, res) => {
   const { name, email, password } = req.body;
 
   if (await User.findOne({ name })) throw HttpError(409);
@@ -24,6 +25,6 @@ const register = async (req, res) => {
     verificationCode,
   });
   res.status(201).json(newUser);
-};
+});
 
 module.exports = register;

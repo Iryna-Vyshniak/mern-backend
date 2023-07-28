@@ -1,0 +1,11 @@
+const Dataitem = require('../../models/Dataitem');
+const { HttpError } = require('../../utils');
+
+const getById = async (req, res) => {
+  const { id } = req.params;
+  const result = await Dataitem.findById(id);
+  if (!result) throw HttpError(404, `id=${id} not found`);
+  res.status(201).json({ result });
+};
+
+module.exports = getById;

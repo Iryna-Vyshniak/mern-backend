@@ -6,6 +6,6 @@ const dataitemsRouter = require('./dataitems');
 const router = Router();
 
 router.use('/users', usersRouter);
-router.use('/items', dataitemsRouter);
+router.use('/dataitems', dataitemsRouter);
 
 module.exports = router;
